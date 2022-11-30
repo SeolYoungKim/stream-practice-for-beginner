@@ -1,9 +1,6 @@
 package _03_function_parameter;
 
 public record Meat(Species species, int weight) {
-    enum Species {
-        PIG, COW, DUCK, CHICKEN, SHEEP
-    }
 
     @Override
     public boolean equals(Object o) {

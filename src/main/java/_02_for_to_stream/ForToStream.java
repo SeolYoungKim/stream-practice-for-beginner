@@ -1,7 +1,9 @@
 package _02_for_to_stream;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -66,5 +68,22 @@ public class ForToStream {
         IntStream.range(0, names.size())  // IntStream
                 .forEach(i -> System.out.println("index를 이용하는 스트림 : " + names.get(i)));
 
+
+        // TODO Map으로도 바꿀 수 있다.
+        // TODO 이름의 순서 대로 key를 순번으로 하고, value를 이름으로 하는 Map으로 바꿔보자!
+
+        // TODO 기존 접근 방식
+        Map<Integer, String> map1 = new HashMap<>();
+        for (int i = 1; i <= names.size(); i++) {
+            map1.put(i, names.get(i));
+        }
+
+        // TODO 스트림
+        Map<Integer, String> map2 = IntStream.rangeClosed(1, names.size())
+                .boxed() // IntStream은 기본형 int에 대한 스트림이기 때문에, boxing을 해줘야 Stream<Integer>로 변환 됨.
+                .collect(Collectors.toUnmodifiableMap(
+                        i -> i,  // key는 숫자를 그대로 쓴다.  자매품 : Function.identity()
+                        i -> names.get(i)
+                ));
     }
 }

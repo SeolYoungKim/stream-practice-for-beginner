@@ -1,9 +1,9 @@
 package _03_function_parameter;
 
-import static _03_function_parameter.Meat.Species.CHICKEN;
-import static _03_function_parameter.Meat.Species.COW;
-import static _03_function_parameter.Meat.Species.PIG;
-import static _03_function_parameter.Meat.Species.SHEEP;
+import static _03_function_parameter.Species.CHICKEN;
+import static _03_function_parameter.Species.COW;
+import static _03_function_parameter.Species.PIG;
+import static _03_function_parameter.Species.SHEEP;
 
 import java.util.ArrayList;
 import java.util.List;
