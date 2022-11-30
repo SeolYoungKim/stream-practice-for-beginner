@@ -27,7 +27,7 @@ public class FunctionalInterface {
         UnaryOperator<Integer> un = a -> a;
 
         Runnable r1 = () -> {};
-        Runnable r2 = () -> System.out.println("하잉");  // T to void
+        Runnable r2 = () -> System.out.println("하잉");  // void to void
 
         Callable<String> ca = () -> "하이용";  // 무에서 유를 창조
     }
