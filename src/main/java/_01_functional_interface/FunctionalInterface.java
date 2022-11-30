@@ -1,5 +1,6 @@
 package _01_functional_interface;
 
+import java.util.Comparator;
 import java.util.concurrent.Callable;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
@@ -25,6 +26,10 @@ public class FunctionalInterface {
         BinaryOperator<Integer> bi = (a, b) -> a + b;
 
         UnaryOperator<Integer> un = a -> a;
+
+        // https://mkyong.com/java8/is-comparator-a-function-interface-but-it-has-two-abstract-methods/
+//        Comparator<Fake> co = (f1, f2) -> f1.forComparing() - f2.forComparing();
+        Comparator<Fake> co = Comparator.comparingInt(Fake::forComparing);
 
         Runnable r1 = () -> {};
         Runnable r2 = () -> System.out.println("하잉");  // void to void
