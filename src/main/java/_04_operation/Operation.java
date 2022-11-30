@@ -28,7 +28,7 @@ public class Operation {
                 .distinct()
                 .collect(Collectors.toList());
 
-        // 개수 세기
+        // 개수 세기 :
         long count = meats.stream()
                 .filter(meat -> meat.species() == SHEEP)
                 .count();

@@ -21,10 +21,8 @@ public class FunctionalInterface {
 
         Function<String, Integer> f = str -> Integer.parseInt(str);  // T to R
 
-        BiFunction<Integer, Integer, Integer> biF = (a, b) -> a + b;  // (T, U) to R
-
+        BiFunction<Integer, Integer, Integer> biF = (a, b) -> a + b;  // (T, U) to
         BinaryOperator<Integer> bi = (a, b) -> a + b;
-
         UnaryOperator<Integer> un = a -> a;
 
         // https://mkyong.com/java8/is-comparator-a-function-interface-but-it-has-two-abstract-methods/

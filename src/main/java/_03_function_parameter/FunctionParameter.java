@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 public class FunctionParameter {
 
-    // TODO 함수형 파라미터를 안쓰면, 아래와 같이 조건 별로 다만들어야된다. -> 에바임 조건 막 20개 추가되면 이제 큰일남;
+    // TODO  함수형 파라미터를 안쓰면, 아래와 같이 조건 별로 다만들어야된다. -> 에바임 조건 막 20개 추가되면 이제 큰일남;
     public static List<Meat> meatsLessThan600g(List<Meat> meats) {
         List<Meat> results = new ArrayList<>();
 
