@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,7 +29,7 @@ public class ForToStream {
     }
 
     public static void main(String[] args) {
-        List<String> names = List.of("연", "석", "풍", "노말", "방장");
+        List<String> names = List.of("연", "석", "풍", "불", "노말", "방장");
 
         // TODO 1. 향상된 for문
         // TODO 반환 값이 없을 때
@@ -43,6 +42,7 @@ public class ForToStream {
         // TODO 이는 사실 위의 for문과 동일하다. (내부 구조 동일)
         // TODO stream에도 forEach()가 있으나, 성능 상 문제로 사용하지 말것을 권고한다. (자세한 이유는 찾아보겠음)
         names.forEach(member -> System.out.println("Collection의 forEach : " + member));  // 람다 표현식
+//        names.stream().forEach(member -> System.out.println("Collection의 forEach : " + member));
 
         // TODO 반환 값이 있을 때 (예를 들어, 값을 특정 객체에 담고 새로운 리스트를 만들 때)
         List<Member> members1 = new ArrayList<>();
@@ -50,9 +50,14 @@ public class ForToStream {
             members1.add(new Member(name));
         }
 
-        List<Member> members2 = names.stream()  // TODO "연", "석", "풍", "노말", "방장"이 하나씩 돌아간다.
+
+        System.out.println("여기를 보세요 ");
+        List<Member> members2 = names.stream()  // TODO "연", "석", "풍", "불", "노말", "방장"이 하나씩 돌아간다.
+                .peek(System.out::println)
                 .map(name -> new Member(name))  // TODO String이 Member로 매핑된다. map은 반환 값이 있을 때 사용한다.
+                .peek(System.out::println)
                 .collect(Collectors.toList());  // TODO 반환된 Member 값들을 List로 모아준다.
+
 
         // TODO 조건문이 있을 때
         List<Member> membersNotHaveLeader1 = new ArrayList<>();
@@ -62,10 +67,11 @@ public class ForToStream {
             }
         }
 
+        // 지연 연산 (lazy evaluation)
         List<Member> membersNotHaveLeader2 = names.stream()
                 .filter(name -> !name.equals("방장"))  // TODO 방장이 아닌 사람들은 true. true면 해당 필터를 통과한다.
                 .map(name -> new Member(name))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());  // 종단연산
 
         List<Member> members = List.of(
                 new Member("방"),
@@ -75,10 +81,12 @@ public class ForToStream {
                 new Member("노말")
         );
 
-        Comparator<Member> before = Comparator.comparingInt(Member::age);
+        Comparator<Member> before = Comparator.comparingInt(Member::age);  // 나이대로 정렬.
 
         List<Member> collect = members.stream()
-                .sorted(before.thenComparing(Member::name, Comparator.naturalOrder()))
+                .sorted(
+                        before.thenComparing(Member::name, Comparator.naturalOrder())  // 자연적인 순서로 정렬하겠다.
+                )
                 .collect(Collectors.toList());
 
         // TODO 2. index를 이용하는 for문
@@ -95,16 +103,23 @@ public class ForToStream {
 
         // TODO 기존 접근 방식
         Map<Integer, String> map1 = new HashMap<>();
-        for (int i = 1; i <= names.size(); i++) {
+        for (int i = 1; i < names.size(); i++) {
             map1.put(i, names.get(i));
         }
 
+        map1.getOrDefault(Integer.MAX_VALUE, "아주 큰 수");
+
         // TODO 스트림
-        Map<Integer, String> map2 = IntStream.rangeClosed(1, names.size())  // int
+        Map<Integer, String> map2 = IntStream.range(1, names.size())  // 기본형 int
                 .boxed() // IntStream은 기본형 int에 대한 스트림이기 때문에, boxing을 해줘야 Stream<Integer>로 변환 됨.  // Integer
                 .collect(Collectors.toUnmodifiableMap(
-                        Function.identity(),  // key는 숫자를 그대로 쓴다.  자매품 : Function.identity()
+                        i -> i,  // key는 숫자를 그대로 쓴다.  자매품 : Function.identity()
                         i -> names.get(i))
                 );
+
+        System.out.println("여기를 보세요");
+        HashMap<Integer, List<String>> map3 = new HashMap<>(); // 리스트가 초기화가 안 된 상태
+        int maxValue = Integer.MAX_VALUE;
+        map3.computeIfAbsent(maxValue, integer -> new ArrayList<>()).add("아주 큰 수");
     }
 }

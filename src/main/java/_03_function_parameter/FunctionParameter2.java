@@ -20,7 +20,7 @@ public class FunctionParameter2 {
         System.out.println("중복중복");
         System.out.println("중복중복");
         System.out.println("중복중복");
-        System.out.println("중복중복");
+        System.out.println("중복중복");  // 반드시 실행해야 되는 메서드가 있는 경우
 
         return new Meat(species, weight);
     }

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class FunctionParameter {
-
     // TODO  함수형 파라미터를 안쓰면, 아래와 같이 조건 별로 다만들어야된다. -> 에바임 조건 막 20개 추가되면 이제 큰일남;
     public static List<Meat> meatsLessThan600g(List<Meat> meats) {
         List<Meat> results = new ArrayList<>();
@@ -41,7 +40,7 @@ public class FunctionParameter {
         List<Meat> results = new ArrayList<>();
 
         for (Meat meat : meats) {
-            if (predicate.test(meat)) {
+            if (predicate.test(meat)) {  // 조건이 뭐든간에 넘겨받은 조건으로 테스틀 함 >> boolean test = byWeight.test(new Meat(PIG, 600));
                 results.add(meat);
             }
         }
@@ -51,8 +50,11 @@ public class FunctionParameter {
 
     public static void main(String[] args) {
         // 동작 예제!
-        List<Meat> meats = List.of(new Meat(PIG, 600), new Meat(PIG, 750),
-                new Meat(COW, 200), new Meat(CHICKEN, 1000),
+        List<Meat> meats = List.of(
+                new Meat(PIG, 600),
+                new Meat(PIG, 750),
+                new Meat(COW, 200),
+                new Meat(CHICKEN, 1000),
                 new Meat(SHEEP, 300));
 
         Predicate<Meat> byWeight = meat -> meat.weight() > 600;

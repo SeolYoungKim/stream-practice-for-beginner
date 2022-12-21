@@ -25,13 +25,13 @@ public class Operation {
 
         // 중복 제거
         List<Meat> nonRepeatedMeats = meats.stream()
-                .distinct()
+                .distinct()  // 중복 제거
                 .collect(Collectors.toList());
 
         // 개수 세기 :
         long count = meats.stream()
                 .filter(meat -> meat.species() == SHEEP)
-                .count();
+                .count(); // 개수 세어주고요
 
         System.out.println(nonRepeatedMeats);
         System.out.println("count = " + count);

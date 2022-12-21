@@ -11,13 +11,16 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class FunctionalInterface {
-
     public static void main(String[] args) {
-        Consumer<String> c = str -> System.out.println(str);  // T to void
+        // void accept(T t)
+        // 소비자
+        Consumer<String> c = (str) -> System.out.println(str);  // T to void
 
+        // 공급자
         Supplier<String> s = () -> "하이용";  // 무에서 유를 창조
 
-        Predicate<String> p = str -> str.equals("방장");  // T to boolean
+        // 조건식
+        Predicate<String> p = str -> str.equals("방장");  // T to boolean  ->  stream.filter(Predicate)
 
         Function<String, Integer> f = str -> Integer.parseInt(str);  // T to R
 
@@ -26,12 +29,15 @@ public class FunctionalInterface {
         UnaryOperator<Integer> un = a -> a;
 
         // https://mkyong.com/java8/is-comparator-a-function-interface-but-it-has-two-abstract-methods/
-//        Comparator<Fake> co = (f1, f2) -> f1.forComparing() - f2.forComparing();
-        Comparator<Fake> co = Comparator.comparingInt(Fake::forComparing);
+        Comparator<Fake> co1 = (f1, f2) -> f2.forComparing() - f1.forComparing();  // reverse
+        Comparator<Fake> co2 = Comparator.comparingInt((fake) -> fake.forComparing());
+        Comparator<Fake> co3 = Comparator.comparingInt(Fake::forComparing);
 
-        Runnable r1 = () -> {};
+        Runnable r1 = () -> {
+        };
         Runnable r2 = () -> System.out.println("하잉");  // void to void
 
+        // Supplier<String> s = () -> "하이용";  // 무에서 유를 창조
         Callable<String> ca = () -> "하이용";  // 무에서 유를 창조
     }
 }

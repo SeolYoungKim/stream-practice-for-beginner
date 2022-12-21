@@ -13,5 +13,4 @@ public record Meat(Species species, int weight) {
         Meat meat = (Meat) o;
         return weight == meat.weight && species == meat.species;
     }
-
 }
